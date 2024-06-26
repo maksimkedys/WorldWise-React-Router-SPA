@@ -15,6 +15,11 @@
   position: relative;
 }
 
+.row textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
 .buttons {
   display: flex;
   justify-content: space-between;
