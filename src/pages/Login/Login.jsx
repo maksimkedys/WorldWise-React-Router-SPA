@@ -1,15 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PageNav from "../../components/PageNav/PageNav";
+import { useAuth } from "../../contexts/AuthContext";
+import Button from "../../components/Button/Button";
+import { useNavigate } from "react-router-dom";
+import SpinnerFullPage from "../../components/Spinners/SpinnerFullPage";
 import styles from "./Login.module.css";
 
 export default function Login() {
   const [email, setEmail] = useState("jack@example.com");
   const [password, setPassword] = useState("qwerty");
+  const { login, isAuthentificated } = useAuth();
+  const navigate = useNavigate();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (email && password) {
+      login(email, password);
+    }
+  }
+
+  useEffect(
+    function () {
+      if (isAuthentificated) navigate("/app", { replace: true });
+    },
+    [isAuthentificated, navigate]
+  );
+
+  if (isAuthentificated) return <SpinnerFullPage />;
 
   return (
     <main className={styles.login}>
       <PageNav />
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.row}>
           <label htmlFor="email">Email address</label>
           <input
@@ -31,9 +53,7 @@ export default function Login() {
         </div>
 
         <div>
-          <button className="" type="button">
-            Login
-          </button>
+          <Button type="primary">Login</Button>
         </div>
       </form>
     </main>
