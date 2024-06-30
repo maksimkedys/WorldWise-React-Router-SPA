@@ -19,7 +19,7 @@ WorldWise is a single-page application (SPA) that provides users with informatio
 
 ## Demo
 
-Check out the live demo of the project [here](worldwise-react-router-spa.netlify.app).
+Check out the live demo of the project [here](https://worldwise-react-router-spa.netlify.app).
 
 ## Installation
 
